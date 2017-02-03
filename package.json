@@ -34,6 +34,7 @@
     "grunt-comment-toggler": "^0.2.2",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-uglify": "^1.0.1",
-    "grunt-search": "^0.1.8"
+    "grunt-search": "^0.1.8",
+    "jquery": "^3.1.1"
   }
 }

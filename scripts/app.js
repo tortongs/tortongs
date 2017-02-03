@@ -15,8 +15,8 @@
             function ($routeProvider) {
                 $routeProvider.when(
                     '/', {
-                        templateUrl: './scripts/home/home.html'
-
+                        templateUrl: './scripts/home/home.html',
+                        controller: 'HomeCtrl'
                     }
                 );
                 $routeProvider.otherwise({redirectTo: '/'});

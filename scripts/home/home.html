@@ -1,1 +1,24 @@
-<md-button class="md-raised">Button</md-button>
+<div layout="column" layout-padding ng-cloak>
+
+  <br/>
+  <md-content class="md-no-momentum">
+    <md-input-container class="md-icon-float md-block">
+      <!-- Use floating label instead of placeholder -->
+      <label>Text</label>
+      <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
+      <input ng-model="search.text" type="text">
+    </md-input-container>
+    <md-button class="md-raised" ng-click="launchSearch()">Search</md-button>
+    <md-button class="md-raised" ng-click="resetSearch()">Reset</md-button>
+  </md-content>
+
+  <md-list>
+    <md-subheader class="md-no-sticky">Results</md-subheader>
+    <md-list-item ng-repeat="result in results" class="noright">
+      <p>{{ result.title }}</p>
+      <md-checkbox class="md-secondary"></md-checkbox>
+      <md-icon md-svg-icon="communication:email"  ng-click="doSecondaryAction($event)" aria-label="Send Email" class="md-secondary md-hue-3" ></md-icon>
+      <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-icon="communication:message"></md-icon>
+    </md-list-item>
+  </md-list>
+</div>
