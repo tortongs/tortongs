@@ -17,8 +17,13 @@
     <md-list-item ng-repeat="result in results" class="noright">
       <p>{{ result.title }}</p>
       <md-checkbox class="md-secondary"></md-checkbox>
-      <md-icon md-svg-icon="communication:email"  ng-click="doSecondaryAction($event)" aria-label="Send Email" class="md-secondary md-hue-3" ></md-icon>
-      <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-icon="communication:message"></md-icon>
+
+
+      <md-icon class="md-secondary"
+        ng-click="doSecondaryAction($event)"
+        aria-label="Chat" title="Watch in WebTorrent">
+        play_arrow
+      </md-icon>
     </md-list-item>
   </md-list>
 </div>

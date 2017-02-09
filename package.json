@@ -26,7 +26,7 @@
     "angular": "^1.5.7",
     "angular-animate": "^1.5.7",
     "angular-aria": "^1.5.7",
-    "angular-material": "^1.0.9",
+    "angular-material": "^1.1.13",
     "angular-route": "^1.5.7",
     "asar": "^0.11.0",
     "electron-packager": "^7.0.4",
@@ -36,5 +36,8 @@
     "grunt-contrib-uglify": "^1.0.1",
     "grunt-search": "^0.1.8",
     "jquery": "^3.1.1"
+  },
+  "dependencies": {
+    "angular-material": "^1.1.3"
   }
 }
