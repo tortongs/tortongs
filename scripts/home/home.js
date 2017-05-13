@@ -5,7 +5,8 @@ angular
       text: ''
     };
 
-    $scope.page = 1;
+    $scope.currentPage = 1;
+    $scope.totalPages = 1;
     $scope.results = [];
 
     /**
@@ -21,12 +22,21 @@ angular
      * Search by the search object.
      */
     $scope.launchSearch = function(){
+      $scope.results = [];
       var data = {
         cat: 0,
-        page: $scope.page,
+        page: $scope.currentPage,
         srcrel: $scope.search.text
       };
 
+      $scope.executeSearch(data);
+    };
+
+    /**
+     * Execute the search.
+     * @param  {Object} params The data to use for search.
+     */
+    $scope.executeSearch = function(data){
       $http({
           method: 'POST',
           url: 'http://www.tntvillage.scambioetico.org/src/releaselist.php',
@@ -36,7 +46,7 @@ angular
       }).then(function(result){
         console.log('All ok');
         $('table tr', result.data).each(function(index, tr){
-          console.log(index, 'tr', tr);
+          //console.log(index, 'tr', tr);
           if(index > 0){
             var magnet = $('td:eq(1) a',tr).attr('href');
             var l = $('td:eq(3)',tr).text();
@@ -52,8 +62,31 @@ angular
             });
           }
         });
+        var pagination = $(".total", result.data);
+        $scope.totalPages = pagination.attr('a');
       }, function(error){
         console.error('Error', error);
       });
+    };
+
+    /**
+     * Load more items.
+     */
+    $scope.loadMore = function(){
+      $scope.currentPage++;
+      var data = {
+        cat: 0,
+        page: $scope.currentPage,
+        srcrel: $scope.search.text
+      };
+      $scope.executeSearch(data);
+    };
+
+    /**
+     * Check if the are more pages to show.
+     * @return {boolean} Returns true if there are more pages, false otherwise.
+     */
+    $scope.hasMorePages = function(){
+      return ($scope.totalPages - $scope.currentPage) > 0;
     };
   });

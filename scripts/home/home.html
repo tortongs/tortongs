@@ -26,4 +26,8 @@
       </md-icon>
     </md-list-item>
   </md-list>
+
+  <md-content class="md-no-momentum">
+    <md-button class="md-raised" ng-click="loadMore()" ng-show="hasMorePages()">Load more (there are {{ totalPages - currentPage }} pages)</md-button>
+  </md-content>
 </div>
