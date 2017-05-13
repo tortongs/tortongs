@@ -18,11 +18,16 @@
       <p>{{ result.title }}</p>
       <md-checkbox class="md-secondary"></md-checkbox>
 
-
       <md-icon class="md-secondary"
         ng-click="doSecondaryAction($event)"
-        aria-label="Chat" title="Watch in WebTorrent">
+        aria-label="Watch in WebTorrent" title="Watch in WebTorrent">
         play_arrow
+      </md-icon>
+
+      <md-icon class="md-secondary"
+        ng-click="openMagnet(result.magnet)"
+        aria-label="Open" title="Open">
+        open_in_new
       </md-icon>
     </md-list-item>
   </md-list>

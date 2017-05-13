@@ -1,3 +1,5 @@
+var electron = require('electron');
+
 angular
   .module('app')
   .controller('HomeCtrl', function($scope, $http, $httpParamSerializerJQLike) {
@@ -88,5 +90,13 @@ angular
      */
     $scope.hasMorePages = function(){
       return ($scope.totalPages - $scope.currentPage) > 0;
+    };
+
+    /**
+     * Open the given magnet using the default OS application.
+     * @param magnet The magnet URL to open.
+     */
+    $scope.openMagnet = function(magnet){
+      electron.shell.openExternal(magnet);
     };
   });
