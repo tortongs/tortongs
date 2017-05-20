@@ -1,7 +1,7 @@
 {
   "name": "tortongs",
   "version": "0.1.0",
-  "description": "An application to search, store and launch your favorite torrent files",
+  "description": "An Electron application to search, store and launch your favorite torrent files",
   "main": "main.js",
   "scripts": {
     "start": "electron main.js"
@@ -13,7 +13,7 @@
   "keywords": [
     "Torrent",
     "Store",
-    "Movie",
+    "Movies",
     "Music",
     "Launch",
     "WebTorrent",
