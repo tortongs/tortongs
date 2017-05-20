@@ -6,7 +6,7 @@ var fs = require('fs');
 
 angular
   .module('app')
-  .controller('HomeCtrl', function($scope, $http, $httpParamSerializerJQLike, $mdDialog, $timeout, $q, $filter, torrentDb) {
+  .controller('HomeCtrl', function($scope, $http, $httpParamSerializerJQLike, $mdDialog, $timeout, $q, $filter, $mdToast, torrentDb) {
     $scope.search = {
       text: ''
     };
@@ -206,6 +206,14 @@ angular
      */
     $scope.copyToClipboard = function(magnet){
       clipboard.writeText(magnet);
+
+      // Show toast
+      $mdToast.show(
+        $mdToast.simple()
+          .textContent('Magnet url copied to clipboard')
+          .position('top right')
+          .hideDelay(3000)
+      );
     };
 
     /**
