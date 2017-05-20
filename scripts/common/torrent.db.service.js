@@ -4,7 +4,7 @@ angular
 
     /**
      * Insert the given torrent in the db.
-     * @param  {string} torrent The torrent to insert.
+     * @param  {object} torrent The torrent to insert.
      */
     this.insert = function (torrent) {
         db.insert(torrent);
@@ -33,5 +33,13 @@ angular
           deferred.resolve(count > 0);
       });
       return deferred.promise;
+    };
+
+    /**
+    * Remove the given torrent in the db.
+     * @param  {string} magnet The magnet url of the torrent to remove.
+     */
+    this.remove = function (magnet) {
+        db.remove({magnet: magnet});
     };
 }]);

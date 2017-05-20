@@ -144,9 +144,13 @@ angular
     /**
      * Set the torrent with the given magnet to saved.
      * @param  {string} magnet The magnet url that identifies the torrent.
+     * @param  {boolean} isSaved Tells if the torrent should be showed as saved or not.
      */
-    $scope.setSaved = function(magnet){
-      $filter('filter')($scope.results, {magnet: magnet})[0].isSaved = true;
+    $scope.setSaved = function(magnet, isSaved){
+      var torrents = $filter('filter')($scope.results, {magnet: magnet});
+      if(torrents.length > 0){
+        torrents[0].isSaved = isSaved;
+      }
     };
 
     /**
@@ -162,7 +166,21 @@ angular
       torrentDb.insert(doc);
 
       // Set the current torrent to isSaved true
-      $scope.setSaved(magnet);
+      $scope.setSaved(magnet, true);
+
+      // Reload saved torrents
+      $scope.loadSavedTorrents();
+    };
+
+    /**
+     * Remove the torrent identified by the given magnet.
+     * @param  {string} magnet The magnet to use to remove the torrent.
+     */
+    $scope.removeTorrent = function(magnet){
+      torrentDb.remove(magnet);
+
+      // Set the current torrent to isSaved false
+      $scope.setSaved(magnet, false);
 
       // Reload saved torrents
       $scope.loadSavedTorrents();

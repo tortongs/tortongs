@@ -71,6 +71,12 @@
         aria-label="Copy Magnet URL To Clipboard" title="Copy Magnet URL To Clipboard">
         content_copy
       </md-icon>
+
+      <md-icon class="md-secondary"
+        ng-click="removeTorrent(torrent.magnet)"
+        aria-label="Remove" title="Remove">
+        delete
+      </md-icon>
     </md-list-item>
   </md-list>
 </div>
