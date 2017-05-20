@@ -5,7 +5,7 @@ var fs = require('fs');
 
 angular
   .module('app')
-  .controller('HomeCtrl', function($scope, $http, $httpParamSerializerJQLike, $mdDialog, $timeout) {
+  .controller('HomeCtrl', function($scope, $http, $httpParamSerializerJQLike, $mdDialog, $timeout, $q, $filter) {
     $scope.search = {
       text: ''
     };
@@ -61,12 +61,16 @@ angular
             var s = $('td:eq(4)',tr).text();
             var c = $('td:eq(5)',tr).text();
             var title = $('td:eq(6)',tr).text();
-            $scope.results.push({
-              magnet: magnet,
-              l: l,
-              s: s,
-              c: c,
-              title: title
+            $scope.isSaved(magnet)
+              .then(function(isSaved){
+                $scope.results.push({
+                  magnet: magnet,
+                  l: l,
+                  s: s,
+                  c: c,
+                  title: title,
+                  isSaved: isSaved
+                });
             });
           }
         });
@@ -137,6 +141,14 @@ angular
     };
 
     /**
+     * Set the torrent with the given magnet to saved.
+     * @param  {string} magnet The magnet url that identifies the torrent.
+     */
+    $scope.setSaved = function(magnet){
+      $filter('filter')($scope.results, {magnet: magnet})[0].isSaved = true;
+    };
+
+    /**
      * Save the given torrent.
      * @param {string} magnet The magnet url of the torrent.
      * @param {string} title The title of the torrent.
@@ -147,6 +159,9 @@ angular
         title: title
       };
       db.insert(doc);
+
+      // Set the current torrent to isSaved true
+      $scope.setSaved(magnet);
 
       // Reload saved torrents
       $scope.loadSavedTorrents();
@@ -165,6 +180,21 @@ angular
     };
 
     $scope.loadSavedTorrents();
+
+    /**
+     * Check if the given magnet url is already saved.
+     * @param  {string} magnet The magnet url to check.
+     * @return {boolean}        Returns true if the magnet url is already saved,
+     * false otherwise.
+     */
+    $scope.isSaved = function(magnet){
+      var deferred = $q.defer();
+      db.count({ magnet: magnet }, function (err, count) {
+          deferred.resolve(count > 0);
+      });
+      return deferred.promise;
+    };
+
 
     /**
      * Show the alert with the given title and error.

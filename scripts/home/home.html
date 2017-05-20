@@ -13,7 +13,13 @@
     <md-subheader class="md-no-sticky">Results</md-subheader>
     <md-list-item ng-repeat="result in results" class="noright">
       <p>{{ result.title }}</p>
-      <md-checkbox class="md-secondary"></md-checkbox>
+
+      <md-icon class="md-secondary"
+        ng-class="{'icon-active': result.isSaved}"
+        ng-click="saveTorrent(result.magnet, result.title)"
+        aria-label="Save" title="Save">
+        save
+      </md-icon>
 
       <md-icon class="md-secondary"
         ng-click="launchInWebTorrent(result.magnet, result.title)"
