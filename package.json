@@ -1,27 +1,37 @@
 {
-  "name": "electron-angular-material",
-  "version": "1.0.0",
-  "description": "An Electron + AngularJS + Angular Material boilerplate",
+  "name": "tortongs",
+  "version": "0.1.0",
+  "description": "An application to search, store and launch your favorite torrent files",
   "main": "main.js",
   "scripts": {
     "start": "electron main.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thomas-barthelemy/electron-angular-boilerplate.git"
+    "url": "git+https://github.com/tortongs/tortongs.git"
   },
   "keywords": [
+    "Torrent",
+    "Store",
+    "Movie",
+    "Music",
+    "Launch",
+    "WebTorrent",
     "Electron",
     "AngularJS",
-    "Angular Material",
-    "Boilerplate"
+    "Angular Material"
   ],
-  "author": "Thomas Barthelemy",
+  "author": "Davide Pastore",
+  "contributors": [
+    {
+      "name" : "Luigi ellepdev"
+    }
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/thomas-barthelemy/electron-angular-boilerplate/issues"
+    "url": "https://github.com/tortongs/tortongs/issues"
   },
-  "homepage": "https://github.com/thomas-barthelemy/electron-angular-boilerplate",
+  "homepage": "https://github.com/tortongs/tortongs",
   "devDependencies": {
     "angular": "^1.5.7",
     "angular-animate": "^1.5.7",
