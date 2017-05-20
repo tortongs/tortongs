@@ -29,6 +29,10 @@
     </md-list-item>
   </md-list>
 
+  <div layout="row" layout-sm="column" layout-align="space-around" ng-show="loading">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  </div>
+
   <md-content class="md-no-momentum">
     <md-button class="md-raised" ng-click="loadMore()" ng-show="hasMorePages()">Load more (there are {{ totalPages - currentPage }} pages)</md-button>
   </md-content>

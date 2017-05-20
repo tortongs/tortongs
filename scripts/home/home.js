@@ -14,6 +14,7 @@ angular
     $scope.totalPages = 1;
     $scope.results = [];
     $scope.savedTorrents = [];
+    $scope.loading = false;
 
     /**
      * Reset the search.
@@ -43,6 +44,7 @@ angular
      * @param  {Object} params The data to use for search.
      */
     $scope.executeSearch = function(data){
+      $scope.loading = true;
       $http({
           method: 'POST',
           url: 'http://www.tntvillage.scambioetico.org/src/releaselist.php',
@@ -70,8 +72,10 @@ angular
         });
         var pagination = $(".total", result.data);
         $scope.totalPages = pagination.attr('a');
+        $scope.loading = false;
       }, function(error){
         console.error('Error', error);
+        $scope.loading = false;
       });
     };
 
