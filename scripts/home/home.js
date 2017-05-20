@@ -1,4 +1,4 @@
-var electron = require('electron');
+var shell = require('electron').shell;
 
 angular
   .module('app')
@@ -97,6 +97,6 @@ angular
      * @param magnet The magnet URL to open.
      */
     $scope.openMagnet = function(magnet){
-      electron.shell.openExternal(magnet);
+      shell.openExternal(magnet);
     };
   });
