@@ -6,7 +6,7 @@ var fs = require('fs');
 
 angular
   .module('app')
-  .controller('HomeCtrl', function($scope, $http, $httpParamSerializerJQLike, $mdDialog, $timeout, $q, $filter) {
+  .controller('HomeCtrl', function($scope, $http, $httpParamSerializerJQLike, $mdDialog, $timeout, $q, $filter, torrentDb) {
     $scope.search = {
       text: ''
     };
@@ -62,7 +62,7 @@ angular
             var s = $('td:eq(4)',tr).text();
             var c = $('td:eq(5)',tr).text();
             var title = $('td:eq(6)',tr).text();
-            $scope.isSaved(magnet)
+            torrentDb.exists(magnet)
               .then(function(isSaved){
                 $scope.results.push({
                   magnet: magnet,
@@ -159,7 +159,7 @@ angular
         magnet: magnet,
         title: title
       };
-      db.insert(doc);
+      torrentDb.insert(doc);
 
       // Set the current torrent to isSaved true
       $scope.setSaved(magnet);
@@ -173,28 +173,14 @@ angular
      * @return {Array} All saved torrents.
      */
     $scope.loadSavedTorrents = function(){
-      db.find({}, function (err, docs) {
-        $timeout(function(){
-          $scope.savedTorrents = docs;
-        });
+      torrentDb.getAllSavedTorrents()
+        .then(function(torrents){
+        $scope.savedTorrents = torrents;
       });
     };
 
+    //Load all saved torrents
     $scope.loadSavedTorrents();
-
-    /**
-     * Check if the given magnet url is already saved.
-     * @param  {string} magnet The magnet url to check.
-     * @return {boolean}        Returns true if the magnet url is already saved,
-     * false otherwise.
-     */
-    $scope.isSaved = function(magnet){
-      var deferred = $q.defer();
-      db.count({ magnet: magnet }, function (err, count) {
-          deferred.resolve(count > 0);
-      });
-      return deferred.promise;
-    };
 
     /**
      * Copy to clipboard.
