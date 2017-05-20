@@ -38,6 +38,15 @@
               label: 'App',
               submenu: [
                   {
+                      label: 'Home',
+                      accelerator: 'CmdOrCtrl+H',
+                      click: function() {
+                          $timeout(function(){
+                            $location.path('/');
+                          });
+                      }
+                  },
+                  {
                       label: 'Preferences',
                       accelerator: 'CmdOrCtrl+P',
                       click: function() {
