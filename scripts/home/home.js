@@ -154,6 +154,20 @@ angular
     };
 
     /**
+     * Save or unsave the given torrent, based on the isSaved parameter.
+     * @param {string} magnet The magnet url of the torrent.
+     * @param {string} title The title of the torrent.
+     * @param {boolean} isSaved Is this torrent already saved?
+     */
+    $scope.saveOrUnsaveTorrent = function(magnet, title, isSaved){
+      if(isSaved){
+        $scope.removeTorrent(magnet, title);
+      } else {
+        $scope.saveTorrent(magnet, title);
+      }
+    };
+
+    /**
      * Save the given torrent.
      * @param {string} magnet The magnet url of the torrent.
      * @param {string} title The title of the torrent.

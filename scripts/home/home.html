@@ -16,7 +16,7 @@
 
       <md-icon class="md-secondary"
         ng-class="{'icon-active': result.isSaved}"
-        ng-click="saveTorrent(result.magnet, result.title)"
+        ng-click="saveOrUnsaveTorrent(result.magnet, result.title, result.isSaved)"
         aria-label="Save" title="Save">
         save
       </md-icon>
