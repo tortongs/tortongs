@@ -1,4 +1,4 @@
-<div layout="column" layout-padding ng-cloak>
+<div layout="column" layout-padding ng-cloak id="home-page">
   <md-content class="md-no-momentum">
     <md-input-container class="md-icon-float md-block">
       <!-- Use floating label instead of placeholder -->
@@ -16,8 +16,8 @@
       <md-checkbox class="md-secondary"></md-checkbox>
 
       <md-icon class="md-secondary"
-        ng-click="doSecondaryAction($event)"
-        aria-label="Watch in WebTorrent" title="Watch in WebTorrent">
+        ng-click="launchInWebTorrent(result.magnet)"
+        aria-label="Launch in WebTorrent" title="Launch in WebTorrent">
         play_arrow
       </md-icon>
 

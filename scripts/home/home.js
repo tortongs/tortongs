@@ -1,8 +1,11 @@
 var shell = require('electron').shell;
+var exec = require('child_process').exec;
+var settings = require('electron-settings');
+var fs = require('fs');
 
 angular
   .module('app')
-  .controller('HomeCtrl', function($scope, $http, $httpParamSerializerJQLike) {
+  .controller('HomeCtrl', function($scope, $http, $httpParamSerializerJQLike, $mdDialog) {
     $scope.search = {
       text: ''
     };
@@ -98,5 +101,46 @@ angular
      */
     $scope.openMagnet = function(magnet){
       shell.openExternal(magnet);
+    };
+
+    /**
+     * Open the given magnet using WebTorrent application.
+     * @param magnet The magnet URL to launch in WebTorrent.
+     */
+    $scope.launchInWebTorrent = function(magnet){
+      var electronPath = settings.get('preferences.electronPath');
+      if(electronPath){
+        if (fs.existsSync(electronPath)) {
+          var command = electronPath + ' "' + magnet + '"';
+          exec(command, function(error, stdout, stderr){
+            if(error){
+              $scope.showAlert('Error executing the command', error + ' ', stderr);
+            } else {
+              console.log('Commad executed!', stdout);
+            }
+          });
+        } else {
+          $scope.showAlert('WebTorrent not found', 'The file ' + electronPath + ' doesn\'t exist. Please set it in the Preferences page');
+        }
+      } else {
+        $scope.showAlert('WebTorrent path is not set', 'WebTorrent path is not set, please set it in the Preferences page');
+      }
+    };
+
+    /**
+     * Show the alert with the given title and error.
+     * @param  {string} title The title to display in the dialog.
+     * @param  {string} error The error to display in the dialog
+     */
+    $scope.showAlert = function(title, error){
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(angular.element(document.querySelector('#home-page')))
+          .clickOutsideToClose(true)
+          .title(title)
+          .textContent(error)
+          .ariaLabel(title)
+          .ok('Ok')
+      );
     };
   });
