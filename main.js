@@ -1,5 +1,6 @@
 var app = require('electron').app;  // Module to control application life.
 var BrowserWindow = require('electron').BrowserWindow;  // Module to create native browser window.
+require('electron-reload')(__dirname); // Auto reload the app if changes are detected
 
 
 // Keep a global reference of the window object, if you don't, the window will
