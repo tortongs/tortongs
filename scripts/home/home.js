@@ -5,7 +5,7 @@ var fs = require('fs');
 
 angular
   .module('app')
-  .controller('HomeCtrl', function($scope, $http, $httpParamSerializerJQLike, $mdDialog) {
+  .controller('HomeCtrl', function($scope, $http, $httpParamSerializerJQLike, $mdDialog, $timeout) {
     $scope.search = {
       text: ''
     };
@@ -143,17 +143,24 @@ angular
         title: title
       };
       db.insert(doc);
+
+      // Reload saved torrents
+      $scope.loadSavedTorrents();
     };
 
     /**
      * Get all saved torrents.
      * @return {Array} All saved torrents.
      */
-    $scope.getAllSavedTorrents = function(){
+    $scope.loadSavedTorrents = function(){
       db.find({}, function (err, docs) {
-        $scope.savedTorrents = docs;
+        $timeout(function(){
+          $scope.savedTorrents = docs;
+        });
       });
     };
+
+    $scope.loadSavedTorrents();
 
     /**
      * Show the alert with the given title and error.

@@ -32,4 +32,23 @@
   <md-content class="md-no-momentum">
     <md-button class="md-raised" ng-click="loadMore()" ng-show="hasMorePages()">Load more (there are {{ totalPages - currentPage }} pages)</md-button>
   </md-content>
+
+  <md-list>
+    <md-subheader class="md-no-sticky">Saved torrents</md-subheader>
+    <md-list-item ng-repeat="torrent in savedTorrents" class="noright">
+      <p>{{ torrent.title }}</p>
+
+      <md-icon class="md-secondary"
+        ng-click="launchInWebTorrent(torrent.magnet, torrent.title)"
+        aria-label="Launch in WebTorrent" title="Launch in WebTorrent">
+        play_arrow
+      </md-icon>
+
+      <md-icon class="md-secondary material-icons"
+        ng-click="openMagnet(torrent.magnet, torrent.title)"
+        aria-label="Open" title="Open">
+        open_in_new
+      </md-icon>
+    </md-list-item>
+  </md-list>
 </div>
