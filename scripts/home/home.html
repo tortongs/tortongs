@@ -1,11 +1,8 @@
 <div layout="column" layout-padding ng-cloak>
-
-  <br/>
   <md-content class="md-no-momentum">
     <md-input-container class="md-icon-float md-block">
       <!-- Use floating label instead of placeholder -->
       <label>Text</label>
-      <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
       <input ng-model="search.text" type="text">
     </md-input-container>
     <md-button class="md-raised" ng-click="launchSearch()">Search</md-button>
@@ -24,7 +21,7 @@
         play_arrow
       </md-icon>
 
-      <md-icon class="md-secondary"
+      <md-icon class="md-secondary material-icons"
         ng-click="openMagnet(result.magnet)"
         aria-label="Open" title="Open">
         open_in_new
