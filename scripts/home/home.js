@@ -1,4 +1,5 @@
 var shell = require('electron').shell;
+var clipboard = require('electron').clipboard;
 var exec = require('child_process').exec;
 var settings = require('electron-settings');
 var fs = require('fs');
@@ -195,6 +196,13 @@ angular
       return deferred.promise;
     };
 
+    /**
+     * Copy to clipboard.
+     * @param  {string} magnet Copy the given magnet to clipboard.
+     */
+    $scope.copyToClipboard = function(magnet){
+      clipboard.writeText(magnet);
+    };
 
     /**
      * Show the alert with the given title and error.

@@ -32,6 +32,12 @@
         aria-label="Open" title="Open">
         open_in_new
       </md-icon>
+
+      <md-icon class="md-secondary"
+        ng-click="copyToClipboard(result.magnet)"
+        aria-label="Copy Magnet URL To Clipboard" title="Copy Magnet URL To Clipboard">
+        content_copy
+      </md-icon>
     </md-list-item>
   </md-list>
 
@@ -58,6 +64,12 @@
         ng-click="openMagnet(torrent.magnet, torrent.title)"
         aria-label="Open" title="Open">
         open_in_new
+      </md-icon>
+
+      <md-icon class="md-secondary"
+        ng-click="copyToClipboard(torrent.magnet)"
+        aria-label="Copy Magnet URL To Clipboard" title="Copy Magnet URL To Clipboard">
+        content_copy
       </md-icon>
     </md-list-item>
   </md-list>
