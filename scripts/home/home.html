@@ -16,13 +16,13 @@
       <md-checkbox class="md-secondary"></md-checkbox>
 
       <md-icon class="md-secondary"
-        ng-click="launchInWebTorrent(result.magnet)"
+        ng-click="launchInWebTorrent(result.magnet, result.title)"
         aria-label="Launch in WebTorrent" title="Launch in WebTorrent">
         play_arrow
       </md-icon>
 
       <md-icon class="md-secondary material-icons"
-        ng-click="openMagnet(result.magnet)"
+        ng-click="openMagnet(result.magnet, result.title)"
         aria-label="Open" title="Open">
         open_in_new
       </md-icon>

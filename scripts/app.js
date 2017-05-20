@@ -1,3 +1,16 @@
+// Global configuration
+
+// Electron
+var app = require('electron').remote.app;
+var path = require('path');
+
+// Database
+var Datastore = require('nedb');
+var db = new Datastore({ filename: app.getPath('userData') + path.sep + 'tortongs.db', autoload: true });
+db.ensureIndex({ fieldName: 'magnet', unique: true }, function (err) {
+  // If there was an error, err is not null
+});
+
 (function () {
     'use strict';
 
@@ -102,7 +115,6 @@
               ]
           }
       ];
-
 
       var menu = Menu.buildFromTemplate(template);
       Menu.setApplicationMenu(menu);

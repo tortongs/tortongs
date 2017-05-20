@@ -13,6 +13,7 @@ angular
     $scope.currentPage = 1;
     $scope.totalPages = 1;
     $scope.results = [];
+    $scope.savedTorrents = [];
 
     /**
      * Reset the search.
@@ -98,16 +99,20 @@ angular
     /**
      * Open the given magnet using the default OS application.
      * @param magnet The magnet URL to open.
+     * @param title The title of the torrent.
      */
-    $scope.openMagnet = function(magnet){
+    $scope.openMagnet = function(magnet, title){
+      $scope.saveTorrent(magnet, title);
       shell.openExternal(magnet);
     };
 
     /**
      * Open the given magnet using WebTorrent application.
      * @param magnet The magnet URL to launch in WebTorrent.
+     * @param title The title of the torrent.
      */
-    $scope.launchInWebTorrent = function(magnet){
+    $scope.launchInWebTorrent = function(magnet, title){
+      $scope.saveTorrent(magnet, title);
       var electronPath = settings.get('preferences.electronPath');
       if(electronPath){
         if (fs.existsSync(electronPath)) {
@@ -125,6 +130,29 @@ angular
       } else {
         $scope.showAlert('WebTorrent path is not set', 'WebTorrent path is not set, please set it in the Preferences page');
       }
+    };
+
+    /**
+     * Save the given torrent.
+     * @param {string} magnet The magnet url of the torrent.
+     * @param {string} title The title of the torrent.
+     */
+    $scope.saveTorrent = function(magnet, title){
+      var doc = {
+        magnet: magnet,
+        title: title
+      };
+      db.insert(doc);
+    };
+
+    /**
+     * Get all saved torrents.
+     * @return {Array} All saved torrents.
+     */
+    $scope.getAllSavedTorrents = function(){
+      db.find({}, function (err, docs) {
+        $scope.savedTorrents = docs;
+      });
     };
 
     /**
