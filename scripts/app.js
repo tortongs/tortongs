@@ -40,11 +40,26 @@ db.ensureIndex({ fieldName: 'magnet', unique: true }, function (err) {
         ]
     );
 
-    app.run(['$location', '$timeout', function($location, $timeout){
+    app.run(['$location', '$timeout', '$rootScope', '$mdSidenav', function($location, $timeout, $rootScope, $mdSidenav){
       // Module automatically included (only) in the Renderer process (Electron)
       //noinspection NodeRequireContents
       var remote = require('electron').remote;
       var Menu = remote.Menu;
+
+      function buildToggler(navID) {
+            return function() {
+                // Component lookup should always be available since we are not using `ng-if`
+                $mdSidenav(navID)
+                .toggle();
+            }
+        };
+
+        $rootScope.isMenuOpen = function(){
+            return $mdSidenav('left').isOpen();
+        };
+
+      $rootScope.toggleLeft = buildToggler('left');
+      
 
       var template = [
           {
